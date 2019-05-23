@@ -25,5 +25,8 @@ RUN rm weewx-owfs-${OWFS_VERSION}.tgz
 
 ENTRYPOINT cp /tmp/config/weewx.conf /etc/weewx/ && \
 		   cp -R /tmp/config/skins/Byteweather /etc/weewx/skins/ && \
-		   service weewx start \
-		   exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"
+		   /usr/bin/weewxd --pidfile=/var/run/weeewx.pid /etc/weewx/weewx.conf
+#		   /etc/init.d/weewx start \
+#		   tail -f /dev/null
+		   
+#		   exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"
