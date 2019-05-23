@@ -23,7 +23,6 @@ RUN wget http://lancet.mit.edu/mwall/projects/weather/releases/weewx-owfs-${OWFS
 RUN wee_extension --install weewx-owfs-${OWFS_VERSION}.tgz
 RUN rm weewx-owfs-${OWFS_VERSION}.tgz
 
-RUN cp /tmp/config/weewx.conf /etc/weewx/
-RUN cp -R /tmp/config/skins/Byteweather /etc/weewx/skins/ 
-
-ENTRYPOINT service weewx start
+ENTRYPOINT cp /tmp/config/weewx.conf /etc/weewx/ && \
+		   cp -R /tmp/config/skins/Byteweather /etc/weewx/skins/ && \
+		   service weewx start
