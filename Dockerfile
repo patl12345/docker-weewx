@@ -2,7 +2,9 @@ FROM debian:stretch-slim
 
 ENV WEEWX_VERSION 3.9.1-1
 ENV OWFS_VERSION 0.21
+ENV TZ=Europe/London
 
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update && apt-get install -y \
 wget \
@@ -26,7 +28,3 @@ RUN rm weewx-owfs-${OWFS_VERSION}.tgz
 ENTRYPOINT cp /tmp/config/weewx.conf /etc/weewx/ && \
 		   cp -R /tmp/config/skins/Byteweather /etc/weewx/skins/ && \
 		   /usr/bin/weewxd --pidfile=/var/run/weeewx.pid /etc/weewx/weewx.conf
-#		   /etc/init.d/weewx start \
-#		   tail -f /dev/null
-		   
-#		   exec /bin/bash -c "trap : TERM INT; sleep infinity & wait"
