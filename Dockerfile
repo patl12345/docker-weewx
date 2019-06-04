@@ -26,5 +26,6 @@ RUN wee_extension --install weewx-owfs-${OWFS_VERSION}.tgz
 RUN rm weewx-owfs-${OWFS_VERSION}.tgz
 
 ENTRYPOINT cp /tmp/config/weewx.conf /etc/weewx/ && \
-		   cp -R /tmp/config/skins/Byteweather /etc/weewx/skins/ && \
-		   /usr/bin/weewxd --pidfile=/var/run/weeewx.pid /etc/weewx/weewx.conf
+	   cp /tmp/config/owfs.conf /etc/owfs.conf && \
+	   cp -R /tmp/config/skins/Byteweather /etc/weewx/skins/ && \
+	   /usr/bin/weewxd --pidfile=/var/run/weeewx.pid /etc/weewx/weewx.conf
